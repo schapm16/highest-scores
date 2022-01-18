@@ -1,9 +1,9 @@
 const process = require('process');
 const path = require('path');
 
-const [ filePathInput, countInput ] = process.argv.slice(2);
+const [ filePathInput, lineCountInput ] = process.argv.slice(2);
 
-let filePath, count;
+let filePath, lineCount;
 
 try {
   filePath = (path.isAbsolute(filePathInput)) ? filePathInput : path.resolve(filePathInput);
@@ -13,8 +13,8 @@ try {
 }
 
 try {
-  count = parseFloat(countInput);
-  if (!Number.isInteger(count)) {
+  lineCount = parseFloat(lineCountInput);
+  if (!Number.isInteger(lineCount)) {
     throw 'Not an Integer';
   }
 } catch (error) {
@@ -24,5 +24,5 @@ try {
 
 module.exports = {
   filePath,
-  count
+  lineCount
 }

@@ -3,6 +3,6 @@ const path = require('path');
 
 const readAndParseFile = require('./readAndParseFile');
 
-const { filePath, count } = require('./cli');
+const { filePath, lineCount } = require('./cli');
 
-readAndParseFile(filePath, count).then(data => console.log(data))
+readAndParseFile(filePath, lineCount).then(data => console.log(data))
