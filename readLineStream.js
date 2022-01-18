@@ -1,0 +1,21 @@
+const readline = require('readline');
+const fs = require('fs');
+
+module.exports = function readLineStream(filePath, onLineEventCallback) {
+  return new Promise((resolve) => {
+    if (!fs.existsSync(filePath)) {
+      throw new Error('Your file could not be found.');
+    }
+
+    const readlineInstance = readline.createInterface({
+      input: fs.createReadStream(filePath),
+      output: null
+    })
+    
+    readlineInstance.on('line', onLineEventCallback)
+
+    readlineInstance.on('close', () => {
+      resolve();
+    })
+  })
+}
