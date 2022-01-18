@@ -1,6 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-
 const readLineStream = require('./readLineStream');
 
 const { filePath, numberOfScores } = require('./cli');
@@ -17,7 +14,7 @@ function splitLine(line) {
 
   let { score, jsonData } = lineRegex.groups;
 
-  return { score, jsonData };
+  return { score, jsonData: jsonData.trim() };
 }
 
 function onLineEventCallback(line) {
@@ -31,9 +28,9 @@ function onLineEventCallback(line) {
 
 function jsonParse(data) {
   try {
-    data = JSON.parse(data.trim());
+    data = JSON.parse(data);
   } catch (error) {
-    console.error('Invalid json format No JSON object could be decoded for line:\n', line);
+    console.error('Invalid json format No JSON object could be decoded for line:\n', data);
     process.exit(1);
   }
 

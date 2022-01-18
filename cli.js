@@ -12,12 +12,8 @@ try {
   process.exit(1);
 }
 
-try {
-  lineCount = parseFloat(lineCountInput);
-  if (!Number.isInteger(lineCount)) {
-    throw 'Not an Integer';
-  }
-} catch (error) {
+lineCount = parseFloat(lineCountInput);
+if (!Number.isInteger(lineCount)) {
   console.error('Please enter an Integer as the second argument.')
   process.exit(1);
 }
