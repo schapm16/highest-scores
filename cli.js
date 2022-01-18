@@ -1,9 +1,9 @@
 const process = require('process');
 const path = require('path');
 
-const [ filePathInput, lineCountInput ] = process.argv.slice(2);
+const [ filePathInput, numberOfScoresInput ] = process.argv.slice(2);
 
-let filePath, lineCount;
+let filePath, numberOfScores;
 
 try {
   filePath = (path.isAbsolute(filePathInput)) ? filePathInput : path.resolve(filePathInput);
@@ -12,13 +12,13 @@ try {
   process.exit(1);
 }
 
-lineCount = parseFloat(lineCountInput);
-if (!Number.isInteger(lineCount)) {
+numberOfScores = parseFloat(numberOfScoresInput);
+if (!Number.isInteger(numberOfScores)) {
   console.error('Please enter an Integer as the second argument.')
   process.exit(1);
 }
 
 module.exports = {
   filePath,
-  lineCount
+  numberOfScores
 }
