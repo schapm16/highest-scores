@@ -4,6 +4,12 @@ const { filePath, numberOfScores } = require('./cli');
 
 const uniqueScores = {};
 
+
+/**
+ * Parse data file line <score>: <jsonData> and return <score> and <jsonData>
+ * @param {String} line
+ * @returns {Object}: {score: String, jsonData: String}
+ */
 function splitLine(line) {
   let lineRegex = line.match(/(?<score>\d+):(?<jsonData>.+)/);
 
@@ -17,6 +23,13 @@ function splitLine(line) {
   return { score, jsonData: jsonData.trim() };
 }
 
+
+/**
+ * Callback to be passed to ReadLineStream() 'line' event handler
+ * This function adds each score's data to the uniqueScores Object
+ * @param {String} line
+ * @returns {undefined}
+ */
 function onLineEventCallback(line) {
   let { score, jsonData } = splitLine(line);
   score  = parseInt(score, 10);
@@ -26,6 +39,12 @@ function onLineEventCallback(line) {
   }
 }
 
+/**
+ * Attempt to JSON.parse the provided string and throw the required
+ * error if it fails
+ * @param {string} data
+ * @returns {Object}
+ */
 function jsonParse(data) {
   try {
     data = JSON.parse(data);

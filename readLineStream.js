@@ -1,6 +1,14 @@
 const readline = require('readline');
 const fs = require('fs');
 
+/**
+ * Takes a file path of a file to create a ReadLine interface for and a callback
+ * that is invoked on each 'line' event. Returns a Promise that resolves when the
+ * file ReadableStream is closed.
+ * @param {String} filePath
+ * @param {Function} onLineEventCallback
+ * @returns {Promise}
+ */
 module.exports = function readLineStream(filePath, onLineEventCallback) {
   return new Promise((resolve) => {
     if (!fs.existsSync(filePath)) {
