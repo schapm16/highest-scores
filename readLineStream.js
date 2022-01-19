@@ -21,10 +21,8 @@ module.exports = function readLineStream(filePath, onLineEventCallback) {
       output: null
     })
     
-    readlineInstance.on('line', onLineEventCallback)
+    readlineInstance.on('line', onLineEventCallback);
 
-    readlineInstance.on('close', () => {
-      resolve();
-    })
+    readlineInstance.on('close', () => resolve());
   })
 }

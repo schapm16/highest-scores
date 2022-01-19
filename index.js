@@ -1,7 +1,5 @@
 const readLineStream = require('./readLineStream');
-
 const { filePath, numberOfScores } = require('./cli');
-
 const uniqueScores = {};
 
 
@@ -22,7 +20,6 @@ function splitLine(line) {
 
   return { score, jsonData: jsonData.trim() };
 }
-
 
 /**
  * Callback to be passed to ReadLineStream() 'line' event handler
