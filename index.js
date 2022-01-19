@@ -1,7 +1,8 @@
 const readLineStream = require('./readLineStream');
 const { filePath, numberOfScores } = require('./cli');
-const uniqueScores = {};
+const ScoreTracker = require('./ScoreTracker');
 
+const scoreTracker = new ScoreTracker(numberOfScores);
 
 /**
  * Parse data file line <score>: <jsonData> and return <score> and <jsonData>
@@ -30,10 +31,7 @@ function splitLine(line) {
 function onLineEventCallback(line) {
   let { score, jsonData } = splitLine(line);
   score  = parseInt(score, 10);
-  uniqueScores[score] = {
-    score,
-    jsonData
-  }
+  scoreTracker.testScore({ score, jsonData });
 }
 
 /**
@@ -54,11 +52,10 @@ function jsonParse(data) {
 }
 
 readLineStream(filePath, onLineEventCallback).then(() => {
-  const scoresArray = Object.entries(uniqueScores)
-    .sort((a, b) => b[1].score - a[1].score)
-    .slice(0, numberOfScores)
+  const scoresArray = Object.values(scoreTracker.uniqueScores)
+    .sort((a, b) => b.score - a.score)
     .map(entry => {
-      let { score, jsonData } = entry[1];
+      let { score, jsonData } = entry;
       return { score, id: jsonParse(jsonData).id }
     })
     
