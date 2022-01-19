@@ -53,12 +53,26 @@ function jsonParse(data) {
   return data;
 }
 
+function partialBubbleSort(array) {
+  for (let n = 0; n < numberOfScores; n++) {
+    for (let i = array.length - 2; i >= 0; i--) {
+      if (array[i].score < array[i + 1].score) {
+        const temp = array[i];
+        array[i] = array[i + 1];
+        array[i + 1] = temp;
+      }
+    }
+  }
+  
+  return array;
+}
+
 readLineStream(filePath, onLineEventCallback).then(() => {
-  const scoresArray = Object.entries(uniqueScores)
-    .sort((a, b) => b[1].score - a[1].score)
+  let scoresArray = Object.values(uniqueScores);
+  scoresArray = partialBubbleSort(scoresArray)
     .slice(0, numberOfScores)
     .map(entry => {
-      let { score, jsonData } = entry[1];
+      let { score, jsonData } = entry;
       return { score, id: jsonParse(jsonData).id }
     })
     

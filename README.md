@@ -5,7 +5,7 @@
 1. Create a ReadableStream of the file and read line-by-line
 2. As each line is read split the line by score and jsonData
 3. Using the score as a key, store the score and jsonData in an Object. This will give me a data set with no duplicate scores and scores processed later will supersede previous scores of the same value (per the requirements specified).
-4. Sort the scores in descending order. (I was hoping to do some sort sorting while reading the data file rather than after the file is fully read but could not figure out how without increasing time complexity.)
+4. Perform a partial bubble sort `N` times to sort the top `N` scores in descending order.
 5. Capture the 'N' highest scores
 6. Transform to correct output format
 
