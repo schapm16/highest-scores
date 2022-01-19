@@ -2,7 +2,7 @@ const readline = require('readline');
 const fs = require('fs');
 
 /**
- * Takes a file path of a file to create a ReadLine interface for and a callback
+ * Takes a file path of a file to create a ReadLine interface for data file and a callback
  * that is invoked on each 'line' event. Returns a Promise that resolves when the
  * file ReadableStream is closed.
  * @param {String} filePath
